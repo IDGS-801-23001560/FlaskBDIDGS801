@@ -15,10 +15,13 @@ def page_not_found(e):
 @app.route("/")
 @app.route("/index")
 def index():
-
     alumnos_list = Alumnos.query.all()
-    
     return render_template("index.html", alumnos=alumnos_list)
+
+@app.route("/detalles/<int:id>")
+def detalles(id):
+    alumno = Alumnos.query.get_or_404(id)
+    return render_template("detalles.html", alumno=alumno)
 
 @app.route("/alumnos", methods=['GET', 'POST'])
 def alumnos():
@@ -36,10 +39,34 @@ def alumnos():
         db.session.commit()
         
         flash('Alumno registrado correctamente!')
-        
         return redirect(url_for('index'))
     
     return render_template("Alumnos.html", form=create_form)
+
+@app.route("/editar/<int:id>", methods=['GET', 'POST'])
+def editar(id):
+    alumno = Alumnos.query.get_or_404(id)
+    
+    create_form = forms.UserForm2(request.form)
+    
+    if request.method == 'GET':
+        create_form.nombre.data = alumno.nombre
+        create_form.apaterno.data = alumno.apaterno
+        create_form.amaterno.data = alumno.amaterno
+        create_form.email.data = alumno.email
+
+    if request.method == 'POST' and create_form.validate():
+        alumno.nombre = create_form.nombre.data
+        alumno.apaterno = create_form.apaterno.data
+        alumno.amaterno = create_form.amaterno.data
+        alumno.email = create_form.email.data
+        
+        db.session.commit()
+        
+        flash('Alumno actualizado correctamente!')
+        return redirect(url_for('index'))
+    
+    return render_template("editar.html", form=create_form)
 
 if __name__ == '__main__':
     csrf.init_app(app)
