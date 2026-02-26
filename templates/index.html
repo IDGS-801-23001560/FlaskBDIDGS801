@@ -32,7 +32,7 @@
                         <th scope="col" class="px-6 py-3 font-medium">Nombre</th>
                         <th scope="col" class="px-6 py-3 font-medium">Apellido Paterno</th>
                         <th scope="col" class="px-6 py-3 font-medium">Apellido Materno</th>
-                        <th scope="col" class="px-6 py-3 font-medium">Correo</th>
+                        <th scope="col" class="px-6 py-3 font-medium">Teléfono</th> <th scope="col" class="px-6 py-3 font-medium">Correo</th>
                         <th scope="col" class="px-6 py-3 font-medium text-center">Acciones</th>
                     </tr>
                 </thead>
@@ -51,6 +51,8 @@
                         <td class="px-6 py-4">
                             {{ alum.amaterno }}
                         </td>
+                        <td class="px-6 py-4">
+                            {{ alum.telefono }} </td>
                         <td class="px-6 py-4 text-fg-brand">
                             {{ alum.email }}
                         </td>
@@ -64,8 +66,7 @@
                     </tr>
                     {% else %}
                     <tr class="bg-white border-b">
-                        <td colspan="6" class="px-6 py-8 text-center text-gray-500">
-                            No hay alumnos registrados. ¡Haz clic en "Nuevo Alumno" para agregar uno!
+                        <td colspan="7" class="px-6 py-8 text-center text-gray-500"> No hay alumnos registrados. ¡Haz clic en "Nuevo Alumno" para agregar uno!
                         </td>
                     </tr>
                     {% endfor %}

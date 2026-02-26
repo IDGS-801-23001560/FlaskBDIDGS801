@@ -35,6 +35,7 @@ def alumnos():
             nombre=create_form.nombre.data,
             apaterno=create_form.apaterno.data,
             amaterno=create_form.amaterno.data,
+            telefono=create_form.telefono.data,
             email=create_form.email.data
         )
         
@@ -55,12 +56,14 @@ def editar(id):
         create_form.nombre.data = alumno.nombre
         create_form.apaterno.data = alumno.apaterno
         create_form.amaterno.data = alumno.amaterno
+        create_form.telefono.data = alumno.telefono
         create_form.email.data = alumno.email
 
     if request.method == 'POST' and create_form.validate():
         alumno.nombre = create_form.nombre.data
         alumno.apaterno = create_form.apaterno.data
         alumno.amaterno = create_form.amaterno.data
+        alumno.telefono = create_form.telefono.data
         alumno.email = create_form.email.data
         
         db.session.commit()
