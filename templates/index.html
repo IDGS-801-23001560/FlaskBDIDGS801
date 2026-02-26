@@ -4,7 +4,7 @@
 
 <div class="flex flex-col items-center w-full py-10 px-4">
     
-    <div class="w-full max-w-6xl">
+    <div class="w-full max-w-7xl">
 
         <h1 class="text-3xl font-bold mb-6 text-heading text-center">Lista de Alumnos</h1>
 
@@ -57,7 +57,9 @@
                         <td class="px-6 py-4 text-center">
                             <a href="{{ url_for('editar', id=alum.id) }}" class="font-medium text-blue-600 hover:underline mr-3">Editar</a>
                             
-                            <a href="{{ url_for('detalles', id=alum.id) }}" class="font-medium text-amber-600 hover:underline">Detalles</a>
+                            <a href="{{ url_for('detalles', id=alum.id) }}" class="font-medium text-amber-600 hover:underline mr-3">Detalles</a>
+
+                            <a href="{{ url_for('eliminar', id=alum.id) }}" class="font-medium text-red-600 hover:underline">Eliminar</a>
                         </td>
                     </tr>
                     {% else %}
