@@ -6,7 +6,7 @@
     
     <div class="w-full max-w-7xl">
 
-        <h1 class="text-3xl font-bold mb-6 text-heading text-center">Lista de Alumnos</h1>
+        <h1 class="text-3xl font-bold mb-6 text-heading text-center">Lista de Maestros</h1>
 
         {% with messages = get_flashed_messages() %}
             {% if messages %}
@@ -19,8 +19,8 @@
         {% endwith %}
 
         <div class="flex justify-end mb-4">
-            <a href="{{ url_for('alumnos') }}" class="text-white bg-brand box-border border border-transparent hover:bg-brand-strong focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none transition-colors">
-                + Nuevo Alumno
+            <a href="{{ url_for('maestros.registrar') }}" class="text-white bg-brand box-border border border-transparent hover:bg-brand-strong focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none transition-colors">
+                + Nuevo Maestro
             </a>
         </div>
 
@@ -28,45 +28,44 @@
             <table class="w-full text-sm text-left rtl:text-right text-body">
                 <thead class="bg-neutral-secondary-soft border-b border-default">
                     <tr>
-                        <th scope="col" class="px-6 py-3 font-medium">ID</th>
+                        <th scope="col" class="px-6 py-3 font-medium">Matrícula</th>
                         <th scope="col" class="px-6 py-3 font-medium">Nombre</th>
-                        <th scope="col" class="px-6 py-3 font-medium">Apellido Paterno</th>
-                        <th scope="col" class="px-6 py-3 font-medium">Apellido Materno</th>
-                        <th scope="col" class="px-6 py-3 font-medium">Teléfono</th> <th scope="col" class="px-6 py-3 font-medium">Correo</th>
+                        <th scope="col" class="px-6 py-3 font-medium">Apellidos</th>
+                        <th scope="col" class="px-6 py-3 font-medium">Especialidad</th>
+                        <th scope="col" class="px-6 py-3 font-medium">Correo</th>
                         <th scope="col" class="px-6 py-3 font-medium text-center">Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {% for alum in alumnos %}
+                    {% for maes in maestros %}
                     <tr class="odd:bg-neutral-primary even:bg-neutral-secondary-soft border-b border-default hover:bg-neutral-100 transition-colors">
                         <th scope="row" class="px-6 py-4 font-medium text-heading whitespace-nowrap">
-                            {{ alum.id }}
+                            {{ maes.matricula }}
                         </th>
                         <td class="px-6 py-4 font-medium">
-                            {{ alum.nombre }}
+                            {{ maes.nombre }}
                         </td>
                         <td class="px-6 py-4">
-                            {{ alum.apaterno }}
+                            {{ maes.apellidos }}
                         </td>
                         <td class="px-6 py-4">
-                            {{ alum.amaterno }}
+                            {{ maes.especialidad }}
                         </td>
-                        <td class="px-6 py-4">
-                            {{ alum.telefono }} </td>
                         <td class="px-6 py-4 text-fg-brand">
-                            {{ alum.email }}
+                            {{ maes.email }}
                         </td>
                         <td class="px-6 py-4 text-center">
-                            <a href="{{ url_for('editar', id=alum.id) }}" class="font-medium text-blue-600 hover:underline mr-3">Editar</a>
+                            <a href="{{ url_for('maestros.editar', matricula=maes.matricula) }}" class="font-medium text-blue-600 hover:underline mr-3">Editar</a>
                             
-                            <a href="{{ url_for('detalles', id=alum.id) }}" class="font-medium text-amber-600 hover:underline mr-3">Detalles</a>
+                            <a href="{{ url_for('maestros.detalles', matricula=maes.matricula) }}" class="font-medium text-amber-600 hover:underline mr-3">Detalles</a>
 
-                            <a href="{{ url_for('eliminar', id=alum.id) }}" class="font-medium text-red-600 hover:underline">Eliminar</a>
+                            <a href="{{ url_for('maestros.eliminar', matricula=maes.matricula) }}" class="font-medium text-red-600 hover:underline">Eliminar</a>
                         </td>
                     </tr>
                     {% else %}
                     <tr class="bg-white border-b">
-                        <td colspan="7" class="px-6 py-8 text-center text-gray-500"> No hay alumnos registrados. ¡Haz clic en "Nuevo Alumno" para agregar uno!
+                        <td colspan="6" class="px-6 py-8 text-center text-gray-500">
+                            No hay maestros registrados. ¡Haz clic en "Nuevo Maestro" para agregar uno!
                         </td>
                     </tr>
                     {% endfor %}

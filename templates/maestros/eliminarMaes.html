@@ -11,8 +11,8 @@
         </svg>
         
         <h3 class="mb-5 text-lg font-normal text-gray-600">
-            ¿Estás seguro de que deseas eliminar permanentemente al alumno <br>
-            <strong class="text-gray-900 text-xl">{{ alumno.nombre }} {{ alumno.apaterno }}</strong>?
+            ¿Estás seguro de que deseas eliminar permanentemente al maestro <br>
+            <strong class="text-gray-900 text-xl">{{ maestro.nombre }} {{ maestro.apellidos }}</strong>?
         </h3>
         
         <form method="POST" action="" class="flex flex-col sm:flex-row justify-center gap-3">
@@ -22,7 +22,7 @@
                 Sí, eliminar
             </button>
             
-            <a href="{{ url_for('index') }}" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 transition-colors">
+            <a href="{{ url_for('maestros.listado') }}" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 transition-colors">
                 No, cancelar
             </a>
         </form>
