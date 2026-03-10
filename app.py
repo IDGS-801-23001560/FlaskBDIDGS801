@@ -6,6 +6,8 @@ from flask_migrate import Migrate
 
 from maestros.routes import maestros
 from alumnos import alumnos_bp
+from cursos import cursos_bp
+from inscripciones import inscripciones_bp
 
 app = Flask(__name__)
 app.config.from_object(DevelopmentConfig)
@@ -13,6 +15,8 @@ csrf = CSRFProtect(app)
 
 app.register_blueprint(maestros)
 app.register_blueprint(alumnos_bp)
+app.register_blueprint(cursos_bp)
+app.register_blueprint(inscripciones_bp)
 
 db.init_app(app)
 migrate = Migrate(app, db)
@@ -23,7 +27,7 @@ def page_not_found(e):
 
 @app.route("/")
 def index():
-    return redirect(url_for('alumnos.listado'))
+    return render_template('index.html')
 
 if __name__ == '__main__':
     csrf.init_app(app)

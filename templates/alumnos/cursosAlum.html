@@ -1,0 +1,62 @@
+{% extends "layout.html" %}
+
+{% block container %}
+
+<div class="flex flex-col items-center w-full py-10 px-4">
+    
+    <div class="w-full max-w-6xl">
+
+        <h1 class="text-3xl font-bold mb-2 text-heading text-center">Cursos Inscritos</h1>
+        <h2 class="text-xl font-medium mb-8 text-brand-strong text-center">Alumno: {{ alumno.nombre }} {{ alumno.apaterno }} {{ alumno.amaterno }}</h2>
+
+        <div class="flex justify-between items-center mb-4">
+            <a href="{{ url_for('alumnos.listado') }}" class="text-body bg-white hover:bg-neutral-100 focus:ring-4 focus:outline-none focus:ring-gray-100 rounded-base shadow-xs border border-default text-sm font-medium px-5 py-2.5 transition-colors">
+                ← Regresar a Alumnos
+            </a>
+            
+            <a href="{{ url_for('inscripciones.registrar') }}" class="text-white bg-brand box-border border border-transparent hover:bg-brand-strong focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none transition-colors">
+                + Inscribir en Curso
+            </a>
+        </div>
+
+        <div class="relative overflow-x-auto bg-neutral-primary-soft shadow-xs rounded-base border border-default">
+            <table class="w-full text-sm text-left rtl:text-right text-body">
+                <thead class="bg-neutral-secondary-soft border-b border-default">
+                    <tr>
+                        <th scope="col" class="px-6 py-3 font-medium">ID Curso</th>
+                        <th scope="col" class="px-6 py-3 font-medium">Nombre del Curso</th>
+                        <th scope="col" class="px-6 py-3 font-medium">Descripción</th>
+                        <th scope="col" class="px-6 py-3 font-medium">Maestro Asignado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for cur in alumno.cursos %}
+                    <tr class="odd:bg-neutral-primary even:bg-neutral-secondary-soft border-b border-default hover:bg-neutral-100 transition-colors">
+                        <th scope="row" class="px-6 py-4 font-medium text-heading whitespace-nowrap">
+                            {{ cur.id }}
+                        </th>
+                        <td class="px-6 py-4 font-medium text-fg-brand">
+                            {{ cur.nombre }}
+                        </td>
+                        <td class="px-6 py-4 truncate max-w-xs" title="{{ cur.descripcion }}">
+                            {{ cur.descripcion }}
+                        </td>
+                        <td class="px-6 py-4">
+                            {{ cur.maestro.nombre }} {{ cur.maestro.apellidos }}
+                        </td>
+                    </tr>
+                    {% else %}
+                    <tr class="bg-white border-b border-default">
+                        <td colspan="4" class="px-6 py-8 text-center text-gray-500">
+                            Este alumno aún no está inscrito en ningún curso.
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

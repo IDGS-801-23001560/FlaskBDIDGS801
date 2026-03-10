@@ -1,0 +1,71 @@
+{% extends "layout.html" %}
+
+{% block container %}
+
+<div class="flex flex-col items-center w-full py-10 px-4">
+    
+    <div class="w-full max-w-5xl">
+
+        <h1 class="text-3xl font-bold mb-6 text-heading text-center">Inscripciones Activas</h1>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                <div class="p-4 mb-4 text-sm rounded-lg {% if category == 'error' %}text-red-800 bg-red-50 border border-red-200{% else %}text-green-800 bg-green-50 border border-green-200{% endif %}" role="alert">
+                    <span class="font-medium">{% if category == 'error' %}¡Error!{% else %}¡Éxito!{% endif %}</span> {{ message }}
+                </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <div class="flex justify-end mb-4">
+            <a href="{{ url_for('inscripciones.registrar') }}" class="text-white bg-brand box-border border border-transparent hover:bg-brand-strong focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none transition-colors">
+                + Nueva Inscripción
+            </a>
+        </div>
+
+        <div class="relative overflow-x-auto bg-neutral-primary-soft shadow-xs rounded-base border border-default">
+            <table class="w-full text-sm text-left rtl:text-right text-body">
+                <thead class="bg-neutral-secondary-soft border-b border-default">
+                    <tr>
+                        <th scope="col" class="px-6 py-3 font-medium">Folio</th>
+                        <th scope="col" class="px-6 py-3 font-medium">Fecha</th>
+                        <th scope="col" class="px-6 py-3 font-medium">Alumno</th>
+                        <th scope="col" class="px-6 py-3 font-medium">Curso Asignado</th>
+                        <th scope="col" class="px-6 py-3 font-medium text-center">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for ins in inscripciones %}
+                    <tr class="odd:bg-neutral-primary even:bg-neutral-secondary-soft border-b border-default hover:bg-neutral-100 transition-colors">
+                        <th scope="row" class="px-6 py-4 font-medium text-heading whitespace-nowrap">
+                            # {{ ins.id }}
+                        </th>
+                        <td class="px-6 py-4">
+                            {{ ins.fecha_inscripcion.strftime('%d/%m/%Y %H:%M') if ins.fecha_inscripcion else 'N/A' }}
+                        </td>
+                        <td class="px-6 py-4 font-medium text-heading">
+                            {{ ins.alumno_nombre }} {{ ins.alumno_apaterno }}
+                        </td>
+                        <td class="px-6 py-4 text-fg-brand font-medium">
+                            {{ ins.curso_nombre }}
+                        </td>
+                        <td class="px-6 py-4 text-center">
+                            <a href="{{ url_for('inscripciones.eliminar', id=ins.id) }}" class="font-medium text-red-600 hover:underline">Cancelar Inscripción</a>
+                        </td>
+                    </tr>
+                    {% else %}
+                    <tr class="bg-white border-b border-default">
+                        <td colspan="5" class="px-6 py-8 text-center text-gray-500">
+                            No hay inscripciones registradas. ¡Haz clic en "Nueva Inscripción" para vincular a un alumno!
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

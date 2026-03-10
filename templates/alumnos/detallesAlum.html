@@ -33,8 +33,15 @@
                 </p>
             </div>
 
-            <div>
-                <a href="{{ url_for('alumnos.listado') }}" class="inline-flex items-center w-auto text-body bg-neutral-secondary-medium box-border border border-default-medium hover:bg-neutral-tertiary-medium hover:text-heading focus:ring-4 focus:ring-neutral-tertiary shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none transition-colors">
+            <div class="flex flex-col sm:flex-row gap-3 mt-4">
+                <a href="{{ url_for('alumnos.cursos_alumno', id=alumno.id) }}" class="inline-flex justify-center items-center w-auto text-white bg-brand box-border border border-transparent hover:bg-brand-strong focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none transition-colors">
+                    <svg class="w-4 h-4 mr-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.333 6.764a3 3 0 1 1 3.141-5.023M2.5 16H1v-2a4 4 0 0 1 4-4m7.379-8.121a3 3 0 1 1 2.976 5.072M15 10a4 4 0 0 1 4 4v2h-1.506M11.5 11.5a3 3 0 1 0-6 0 3 3 0 0 0 6 0ZM2 19h13a4 4 0 0 0 4-4v-2H1v2a4 4 0 0 0 1 4Z"/>
+                    </svg>
+                    Ver Cursos Inscritos
+                </a>
+
+                <a href="{{ url_for('alumnos.listado') }}" class="inline-flex justify-center items-center w-auto text-body bg-neutral-secondary-medium box-border border border-default-medium hover:bg-neutral-tertiary-medium hover:text-heading focus:ring-4 focus:ring-neutral-tertiary shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none transition-colors">
                     <svg class="w-4 h-4 mr-2 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 12H5m14 0-4 4m4-4-4-4"/>
                     </svg>

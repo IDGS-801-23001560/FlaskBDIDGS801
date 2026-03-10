@@ -73,3 +73,10 @@ def eliminar(id):
         return redirect(url_for('alumnos.listado'))
     
     return render_template("alumnos/eliminarAlum.html", alumno=alumno, form=form)
+
+@alumnos_bp.route("/alumnos/<int:id>/cursos")
+def cursos_alumno(id):
+    
+    alumno = Alumnos.query.get_or_404(id)
+    
+    return render_template("alumnos/cursosAlum.html", alumno=alumno)

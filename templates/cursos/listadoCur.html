@@ -1,0 +1,73 @@
+{% extends "layout.html" %}
+
+{% block container %}
+
+<div class="flex flex-col items-center w-full py-10 px-4">
+    
+    <div class="w-full max-w-7xl">
+
+        <h1 class="text-3xl font-bold mb-6 text-heading text-center">Lista de Cursos</h1>
+
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 border border-green-200" role="alert">
+                    <span class="font-medium">¡Operación exitosa!</span> {{ message }}
+                </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <div class="flex justify-end mb-4">
+            <a href="{{ url_for('cursos.registrar') }}" class="text-white bg-brand box-border border border-transparent hover:bg-brand-strong focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none transition-colors">
+                + Nuevo Curso
+            </a>
+        </div>
+
+        <div class="relative overflow-x-auto bg-neutral-primary-soft shadow-xs rounded-base border border-default">
+            <table class="w-full text-sm text-left rtl:text-right text-body">
+                <thead class="bg-neutral-secondary-soft border-b border-default">
+                    <tr>
+                        <th scope="col" class="px-6 py-3 font-medium">ID</th>
+                        <th scope="col" class="px-6 py-3 font-medium">Nombre del Curso</th>
+                        <th scope="col" class="px-6 py-3 font-medium">Descripción</th>
+                        <th scope="col" class="px-6 py-3 font-medium">Maestro Asignado</th>
+                        <th scope="col" class="px-6 py-3 font-medium text-center">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for cur in cursos %}
+                    <tr class="odd:bg-neutral-primary even:bg-neutral-secondary-soft border-b border-default hover:bg-neutral-100 transition-colors">
+                        <th scope="row" class="px-6 py-4 font-medium text-heading whitespace-nowrap">
+                            {{ cur.id }}
+                        </th>
+                        <td class="px-6 py-4 font-medium">
+                            {{ cur.nombre }}
+                        </td>
+                        <td class="px-6 py-4 truncate max-w-xs" title="{{ cur.descripcion }}">
+                            {{ cur.descripcion }}
+                        </td>
+                        <td class="px-6 py-4 text-fg-brand font-medium">
+                            {{ cur.maestro.nombre }} {{ cur.maestro.apellidos }}
+                        </td>
+                        <td class="px-6 py-4 text-center">
+                            <a href="{{ url_for('cursos.editar', id=cur.id) }}" class="font-medium text-blue-600 hover:underline mr-3">Editar</a>
+                            <a href="{{ url_for('cursos.detalles', id=cur.id) }}" class="font-medium text-amber-600 hover:underline mr-3">Detalles</a>
+                            <a href="{{ url_for('cursos.eliminar', id=cur.id) }}" class="font-medium text-red-600 hover:underline">Eliminar</a>
+                        </td>
+                    </tr>
+                    {% else %}
+                    <tr class="bg-white border-b border-default">
+                        <td colspan="5" class="px-6 py-8 text-center text-gray-500">
+                            No hay cursos registrados. ¡Haz clic en "Nuevo Curso" para agregar uno!
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,52 @@
+{% extends "layout.html" %}
+
+{% block container %}
+
+<div class="flex flex-col items-center w-full py-10 px-4">
+
+    <div class="w-full max-w-md bg-neutral-primary-soft p-6 rounded-base shadow-xs border border-default">
+        
+        <h2 class="text-2xl font-bold mb-6 text-heading text-center">Inscribir Alumno a Curso</h2>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                <div class="p-4 mb-4 text-sm rounded-lg {% if category == 'error' %}text-red-800 bg-red-50 border border-red-200{% else %}text-blue-800 bg-blue-50 border border-blue-200{% endif %}" role="alert">
+                    <span class="font-medium">{% if category == 'error' %}Atención:{% else %}Aviso:{% endif %}</span> {{ message }}
+                </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <form method="POST" action="">
+            {{ form.hidden_tag() }}
+
+            <div class="relative z-0 w-full mb-6 group">
+                <label for="{{ form.alumno_id.id }}" class="block mb-2 text-sm font-medium text-gray-500">Seleccionar Alumno</label>
+                {{ form.alumno_id(class="bg-neutral-secondary-soft border border-default text-body text-sm rounded-base focus:ring-brand-medium focus:border-brand-medium block w-full p-2.5") }}
+                {% if form.alumno_id.errors %}
+                    <p class="mt-2 text-sm text-red-600">{{ form.alumno_id.errors[0] }}</p>
+                {% endif %}
+            </div>
+
+            <div class="relative z-0 w-full mb-6 group">
+                <label for="{{ form.curso_id.id }}" class="block mb-2 text-sm font-medium text-gray-500">Seleccionar Curso</label>
+                {{ form.curso_id(class="bg-neutral-secondary-soft border border-default text-body text-sm rounded-base focus:ring-brand-medium focus:border-brand-medium block w-full p-2.5") }}
+                {% if form.curso_id.errors %}
+                    <p class="mt-2 text-sm text-red-600">{{ form.curso_id.errors[0] }}</p>
+                {% endif %}
+            </div>
+
+            <button type="submit" class="w-full text-white bg-brand box-border border border-transparent hover:bg-brand-strong focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-5 py-2.5 text-center focus:outline-none transition-colors mt-4">
+                Confirmar Inscripción
+            </button>
+            
+            <a href="{{ url_for('inscripciones.listado') }}" class="block text-center mt-4 text-sm text-gray-500 hover:text-brand-strong hover:underline">
+                Cancelar
+            </a>
+        </form>
+    </div>
+
+</div>
+
+{% endblock %}
